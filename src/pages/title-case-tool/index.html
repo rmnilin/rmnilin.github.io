@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}Title Case Tool @ {{ super() }}{% endblock title %}
+
+{% block head %}
+{% set url = "https://rmnilin.github.io/title-case-tool/" %}
+{% set title = "Title Case Tool" %}
+{% set description = title ~ " applies Chicago and AP title case styles to the input text." %}
+
+<link rel="stylesheet" href="./style.css">
+<link rel="preconnect" href="https://esm.sh">
+
+<meta name="description" content="{{ description }}">
+<meta name="keywords" content="chicago manual of style, ap style, apa style, title case, {{ title }}, title case converter, title case, title case online, title case converter">
+
+<meta property="og:title" content="{{ title }}">
+<meta property="og:url" content="{{ url | safe }}">
+<meta property="og:description" content="{{ description }}">
+
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "{{ title }}",
+    "url": "{{ url | safe }}",
+    "description": "{{ description }}",
+    "applicationCategory": "UtilitiesApplication"
+}</script>
+{% endblock head %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main>
+    <h1>Title Case Tool</h1>
+    <p>
+        This tool is based on <a href="https://github.com/words/ap-style-title-case"><code>ap-style-title-case</code></a> and <a href="https://github.com/vercel/title">Title</a> libraries and applies <a href="https://www.apstylebook.com">AP</a>/<a href="https://apastyle.apa.org">APA</a> and <a href="https://www.chicagomanualofstyle.org">The Chicago Manual of Style</a> title case variants to the input text.
+    </p>
+    <p>
+        <b>AP</b> style is commonly used for journalism and news writing.
+    </p>
+    <p>
+        <b>APA</b> style is used in the social sciences for research papers and academic articles. The only difference being that AP style does not recommend the use of title case for newspaper headlines, but rather sentence case.
+    </p>
+    <p>
+        <b>Chicago</b> style is best for book publishing, academic writing, and detailed publications requiring comprehensive guidelines.
+    </p>
+    <p>
+        <form oninput="handleInput(this)">
+            <label for="input">Input</label>
+            <div style="display: inline-flex; align-items: center; gap: 1ch;">
+                <label>Output</label>
+                <select name="variant">
+                    <option value="ap">AP/APA</option>
+                    <option value="chicago">Chicago</option>
+                </select>
+                <button type="button" onclick="copy()">Copy</button>
+            </div>
+            <textarea id="input" name="input" placeholder="Enter text here..." rows="1" autofocus></textarea>
+            <output name="output"></output>
+        </form>
+    </p>
+</main>
+
+<script type="module" src="./script.js"></script>
+{% endblock content %}

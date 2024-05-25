@@ -1,0 +1,49 @@
+:root {
+    font: 18px / 1.618 serif;
+}
+
+body {
+    width: 50rem;
+    max-width: calc(100vw - 7rem);
+    margin: 3.5rem auto;
+
+    a {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    button, select {
+        cursor: pointer;
+    }
+
+    code {
+        font-size: 0.815em;
+        letter-spacing: -0.03em;
+    }
+
+    ol {
+        list-style: none;
+        counter-reset: item;
+        padding-left: 0;
+
+        li::before {
+            counter-increment: item;
+            content: counter(item) ". ";
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+        li {
+            text-indent: -2.5ch;
+            margin-left: 2.5ch;
+            &::before {
+                content: "— ";
+            }
+        }
+    }
+}
