@@ -1,0 +1,10 @@
+[package]
+name = "build-tool"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+tera = "=1.20.0"
+wabt = "=0.10.0"
+wasm-opt = "=0.116.1"

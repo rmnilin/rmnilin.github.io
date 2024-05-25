@@ -1,0 +1,25 @@
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
+
+    label {
+        font-weight: bold;
+    }
+
+    textarea {
+        width: 100%;
+        min-height: 100%;
+        font: inherit;
+        background: none;
+        border: none;
+        resize: none;
+        padding: 0;
+        outline: none;
+        overflow: hidden;
+    }
+
+    output {
+        white-space: pre-wrap;
+    }
+}

@@ -1,0 +1,87 @@
+form {
+    margin-bottom: 1.618rem;
+}
+
+table {
+    --border: 1px solid color-mix(in srgb, Canvas, CanvasText 10%);
+    border-top: var(--border);
+    border-left: var(--border);
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, min-content) auto;
+}
+
+tbody, tr {
+    display: contents;
+}
+
+th, td {
+    border-right: var(--border);
+    border-bottom: var(--border);
+
+    padding: 0.309em 0.618em;
+
+    display: flex;
+    align-items: center;
+    &.right {
+        justify-content: flex-end;
+    }
+
+    text-wrap: nowrap;
+    &:nth-last-child(1) {
+        text-wrap: initial;
+        word-break: break-all;
+    }
+
+    &[colspan="3"] {
+        grid-column-end: span 3;
+    }
+    &[rowspan="2"] {
+        grid-row-end: span 2;
+    }
+}
+
+input {
+    width: calc(100% + 0.927em);
+    border: none;
+    padding: 0 0 0 0.309em;
+    margin-inline: -0.309em;
+    font: inherit;
+}
+
+output {
+    &[name="exponentBit"]:nth-last-child(4n + 1):not(:last-child),
+    &[name="significandBit"]:nth-child(4n + 1):not(:last-child, :first-child) {
+        margin-right: 0.5ch;
+    }
+
+    &[name$="Bit"] {
+        cursor: pointer;
+        position: relative;
+
+        &:before {
+            content: "";
+            display: inline-block;
+            width: 168%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: -34%;
+            border-radius: 2px;
+            pointer-events: none;
+        }
+        &:hover:before {
+            background: color-mix(in srgb, transparent, CanvasText 10%);
+        }
+        &.highlight:before {
+            background: color-mix(in srgb, transparent, CanvasText 5%);
+        }
+    }
+}
+
+.implicitBit {
+    color: color-mix(in srgb, transparent, CanvasText 25%);
+    letter-spacing: 0.1ch;
+    margin-right: 0.25ch;
+}

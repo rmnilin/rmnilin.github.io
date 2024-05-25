@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block title %}IEEE 754 Tool @ {{ super() }}{% endblock title %}
+
+{% block head %}
+{% set url = "https://rmnilin.github.io/ieee-754-tool/" %}
+{% set title = "IEEE 754 Tool" %}
+{% set description = title ~ " converts, analyzes, and helps to understand floating point numbers with precise binary and decimal representations." %}
+
+<link rel="stylesheet" href="./style.css">
+
+<meta name="description" content="{{ description }}">
+<meta name="keywords" content="ieee 754, ieee 754 online, ieee 754 representation, {{ title }}, floating point, floating point representation, floating point analysis, floating point arithmetic, floating point converter, binary, binary converter, decimal, decimal converter">
+
+<meta property="og:title" content="{{ title }}">
+<meta property="og:image" content="{{ url | safe }}meta-image.png">
+<meta property="og:image:alt" content="{{ title }} Screenshot">
+<meta property="og:url" content="{{ url | safe }}">
+<meta property="og:description" content="{{ description }}">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"{{ title }}","url":"{{ url | safe }}","description":"{{ description }}","applicationCategory":"EducationalApplication"}</script>
+{% endblock head %}
+
+{% block content %}
+{% include "components/header.html" %}
+
+<main>
+    <h1>IEEE 754 Tool (WIP)</h1>
+    <form oninput="update()">
+        <table>
+            <tr>
+                <td>Input step</td>
+                <td colspan="3"><input type="number" name="step" value="0.1" min="0" oninput="updateStep()"></td>
+            </tr>
+            <tr>
+                <th>Input</th>
+                <td colspan="3"><input type="number" name="input" value="0" step="0.1" autofocus></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="right">Sign</td>
+                <td class="right">Exponent</td>
+                <td>Significand</td>
+            </tr>
+            <tr>
+                <td rowspan="2">Binary</td>
+                <td rowspan="2" class="right"><output name="signBit"></output></td>
+                <td class="right">{% for i in range(end=8) %}<output name="exponentBit"></output>{% endfor %}</td>
+                <td><span class="implicitBit">1.</span>{% for i in range(end=23) %}<output name="significandBit"></output>{% endfor %}</td>
+            </tr>
+            <tr>
+                <td class="right">{% for i in range(end=11) %}<output name="exponentBit"></output>{% endfor %}</td>
+                <td><span class="implicitBit">1.</span>{% for i in range(end=52) %}<output name="significandBit"></output>{% endfor %}</td>
+            </tr>
+            <tr>
+                <td rowspan="2">Decoded</td>
+                <td rowspan="2" class="right"><output name="signDecoded"></output></td>
+                <td class="right"><output name="exponentDecoded"></output></td>
+                <td><output name="significandDecoded"></output></td>
+            </tr>
+            <tr>
+                <td class="right"><output name="exponentDecoded"></output></td>
+                <td><output name="significandDecoded"></output></td>
+            </tr>
+            <tr>
+                <th rowspan="2">Output</th>
+                <td colspan="3"><output name="output"></output></td>
+            </tr>
+            <tr>
+                <td colspan="3"><output name="output"></output></td>
+            </tr>
+            <tr>
+                <td rowspan="2">Error</td>
+                <td colspan="3"><output name="error"></output></td>
+            </tr>
+            <tr>
+                <td colspan="3"><output name="error"></output></td>
+            </tr>
+        </table>
+    </form>
+    <p>
+        This tool is inspired by Harald Schmidt's <a href="https://www.h-schmidt.net/FloatConverter/IEEE754.html">IEEE 754 Converter</a>. It's not much different from the original, but it does have a few extra little features like exact decimal representation, 64-bit support, and storing input in the URL query string.
+    </p>
+    <p>
+        The source code is available on <a href="https://github.com/rmnilin/rmnilin.github.io/tree/main/src/pages/ieee-754-tool">GitHub</a>. The core functionality is implemented using 5 simple functions: 4 written in WebAssembly Text Format for type punning and 1 written in Rust for exact decimal representation.
+    </p>
+</main>
+
+<script type="module" src="./script.js"></script>
+{% endblock content %}

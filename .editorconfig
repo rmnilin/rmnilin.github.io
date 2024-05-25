@@ -1,0 +1,16 @@
+root = true
+
+[*]
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.svg]
+insert_final_newline = false
+
+[*.yaml]
+indent_size = 2
+
+[makefile]
+indent_style = tab
